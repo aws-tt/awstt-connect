@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Connect with AWS Torque & Tension</title>
     <!-- Google Fonts for Industrial/Modern Tech Look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,6 @@
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
             --accent-orange: #ff6b00; /* Industrial Safety Orange */
-            --accent-blue: #00e5ff;   /* Precision Calibration Cyan */
         }
 
         * {
@@ -32,17 +31,18 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-main);
-            min-height: 100vh;
+            height: 100vh;
+            height: 100dvh; /* Dynamic viewport height for mobile browser toolbars */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
             position: relative;
-            overflow-x: hidden;
+            overflow: hidden; /* Lock viewport from scrolling */
         }
 
-        /* Industrial Grid/Machinery Background Overlay */
+        /* Industrial Grid Background Overlay */
         body::before {
             content: "";
             position: fixed;
@@ -50,13 +50,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* High-quality industrial texture placeholder */
             background: linear-gradient(135deg, rgba(18, 22, 26, 0.95) 30%, rgba(18, 22, 26, 0.8) 100%), 
                         url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200') no-repeat center center/cover;
             z-index: -2;
         }
 
-        /* Subtle Technical Grid Overlay */
+        /* Technical Grid Overlay */
         body::after {
             content: "";
             position: fixed;
@@ -72,17 +71,25 @@
 
         .container {
             width: 100%;
-            max-width: 520px;
-            text-align: center;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            max-height: 85vh; /* Prevents overflow layouts on short screens */
         }
 
-        /* Logo Styling */
+        /* Logo Scaling */
         .logo-container {
-            margin-bottom: 25px;
+            margin-bottom: 3vh; /* Scalable vertical spacing */
+            display: flex;
+            justify-content: center;
         }
 
         .logo-container img {
-            max-width: 240px;
+            max-width: 200px;
+            width: 45vw; /* Responsive scaling based on viewport width */
             height: auto;
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
         }
@@ -91,49 +98,49 @@
         .profile-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-top: 4px solid var(--accent-orange); /* Heavy duty top border */
+            border-top: 4px solid var(--accent-orange);
             border-radius: 12px;
-            padding: 30px 25px;
+            padding: 4vh 20px; /* Adapts internal spacing to screen height */
             backdrop-filter: blur(10px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            margin-bottom: 20px;
+            width: 100%;
         }
 
         .profile-card h1 {
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             font-weight: 800;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            margin-bottom: 8px;
+            margin-bottom: 1vh;
         }
 
         .profile-card p {
             color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 20px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin-bottom: 3vh;
         }
 
         /* Technical Badge */
         .badge {
             display: inline-block;
             font-family: 'Chivo Mono', monospace;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             background: rgba(255, 107, 0, 0.1);
             color: var(--accent-orange);
             border: 1px solid rgba(255, 107, 0, 0.3);
-            padding: 4px 12px;
+            padding: 4px 10px;
             border-radius: 4px;
             text-transform: uppercase;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 2vh;
         }
 
         /* Links / Buttons Stack */
         .links-stack {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 1.5vh; /* Tightens or expands button gap proportionally */
         }
 
         .connect-btn {
@@ -144,35 +151,26 @@
             border-radius: 8px;
             color: var(--text-main);
             text-decoration: none;
-            padding: 16px 20px;
+            padding: 14px 18px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: all 0.25s ease;
-            position: relative;
-            overflow: hidden;
         }
 
         .connect-btn i {
-            font-size: 1.25rem;
-            width: 35px;
+            font-size: 1.15rem;
+            width: 30px;
             text-align: left;
             color: var(--accent-orange);
-            transition: transform 0.25s ease;
         }
 
         /* Button Hover Effects */
         .connect-btn:hover {
             background: rgba(255, 107, 0, 0.1);
             border-color: var(--accent-orange);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 107, 0, 0.15);
         }
 
-        .connect-btn:hover i {
-            transform: scale(1.15);
-        }
-
-        /* Highlighted Primary Link (Main Website) */
+        /* Highlighted Primary Link */
         .connect-btn.primary-btn {
             background: linear-gradient(135deg, #ff6b00 0%, #e05e00 100%);
             border: none;
@@ -183,23 +181,26 @@
             color: #ffffff;
         }
 
-        .connect-btn.primary-btn:hover {
-            background: linear-gradient(135deg, #ff7c1f 0%, #f56700 100%);
-            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.4);
-        }
-
         /* Footer / Verification Note */
         .footer {
-            margin-top: 30px;
-            font-size: 0.75rem;
+            margin-top: 3vh;
+            font-size: 0.7rem;
             color: var(--text-muted);
             font-family: 'Chivo Mono', monospace;
             text-transform: uppercase;
             letter-spacing: 1px;
+            text-align: center;
         }
 
         .footer i {
             color: var(--accent-orange);
+        }
+
+        /* Optimization tweak for very short mobile screens */
+        @media (max-height: 667px) {
+            .profile-card p { display: none; } /* Drops description to prioritize buttons */
+            .connect-btn { padding: 12px 16px; font-size: 0.9rem; }
+            .logo-container { margin-bottom: 1.5vh; }
         }
     </style>
 </head>
@@ -207,7 +208,7 @@
 
     <div class="container">
         
-        <!-- Logo Section (Relative link fetching from GitHub workspace root) -->
+        <!-- Logo Section -->
         <div class="logo-container">
             <img src="logo.png" alt="AWS Torque & Tension Logo">
         </div>
@@ -257,3 +258,4 @@
 
 </body>
 </html>
+
